@@ -23,20 +23,23 @@ class _MyHomePageState extends State<Visualizer> {
     var algo = Provider.of<Algo>(context);
     var heightRatio = MediaQuery.of(context).size.height;
     return Scaffold(
-        body: SingleChildScrollView(
-      child: Column(
-        children: [
-          MyAppBar(),
-          Container(
-            height: heightRatio * 0.90,
-            width: MediaQuery.of(context).size.width,
-            child: CustomPaint(
-              painter: BarPainter(
-                  numbers: algo.number, heightRatio: heightRatio * 0.8),
+        body: Column(
+      children: [
+        MyAppBar(),
+        Expanded(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
+              height: heightRatio * 0.90,
+              width: MediaQuery.of(context).size.width,
+              child: CustomPaint(
+                painter: BarPainter(
+                    numbers: algo.number, heightRatio: heightRatio * 0.8),
+              ),
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     ));
   }
 }
@@ -56,19 +59,19 @@ class BarPainter extends CustomPainter {
       ..strokeWidth = width;
 
     for (int i = 0; i < numbers.length; i++) {
-      if (numbers[i] < 500 * 0.2)
+      if (numbers[i] < 100 * 0.2)
         brushpaint.color = Colors.primaries[3].shade100;
-      else if (numbers[i] < 500 * 0.4)
+      else if (numbers[i] < 100 * 0.4)
         brushpaint.color = Colors.primaries[3].shade300;
-      else if (numbers[i] < 500 * 0.6)
+      else if (numbers[i] < 100 * 0.6)
         brushpaint.color = Colors.primaries[3].shade500;
-      else if (numbers[i] < 500 * 0.8)
+      else if (numbers[i] < 100 * 0.8)
         brushpaint.color = Colors.primaries[3].shade700;
-      else if (numbers[i] < 500)
+      else if (numbers[i] < 100)
         brushpaint.color = Colors.primaries[3].shade900;
 
       canvas.drawLine(Offset(i * width, height),
-          Offset(i * width, height - numbers[i].ceilToDouble()), brushpaint);
+          Offset(i * width, height - (height * numbers[i] * 0.01)), brushpaint);
     }
   }
 

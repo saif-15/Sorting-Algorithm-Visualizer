@@ -53,7 +53,7 @@ class Algo extends ChangeNotifier {
   randomize() {
     _numbers.clear();
     for (var i = 0; i < size; i++) {
-      _numbers.add(Random().nextInt(_sampleSize.round()) % 500);
+      _numbers.add(Random().nextInt(_sampleSize.round()) % 100);
     }
     notifyListeners();
   }
